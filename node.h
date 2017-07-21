@@ -23,7 +23,8 @@ public:
 	~Node(){};
 
 	void notify(Node){};
-	virtual ReturnCode tick(){ cout << "node" << endl; };
+	virtual ReturnCode tick(){ //cout << "node" << endl; 
+		};
 	
 };
 
@@ -40,10 +41,10 @@ private:
 	function<ReturnCode()> action;
 
 public:
-	Action(){};
+	Action(function<ReturnCode()> act){ action = act; };
 	~Action(){};
 	void notify(Node){};
-	ReturnCode tick(){};
+	ReturnCode tick();
 
 };
 
@@ -72,7 +73,7 @@ protected:
 	vector<Node*> children;
 
 public:
-	Composite(){};
+	Composite(){ currentChild = 0; };
 	~Composite(){};
 	void notify(Node){};
 	void addChild(Node *n) { children.push_back(n); }
