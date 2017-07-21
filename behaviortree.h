@@ -5,6 +5,7 @@
 #include "returncode.h"
 #include <vector>
 
+using namespace std;
 
 class BehaviorTree
 {
