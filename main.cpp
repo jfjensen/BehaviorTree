@@ -7,28 +7,30 @@
 #include "node.h"
 #include "returncode.h"
 
-
-
+#include "log.h"
+// https://stackoverflow.com/questions/5028302/small-logger-class
 
 
 using namespace std;
 
+structlog LOGCFG = {};
+
 ReturnCode predOnComingCar()
 {
 	
-	cout << "predOnComingCar -> ";
+	LOG(DEBUG) << "predOnComingCar -> ";
    	random_device rd;  //Will be used to obtain a seed for the random number engine
     mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
     uniform_int_distribution<> dis(0,1);
 	int true_false = dis(gen);
 	if (true_false==1)
 	{
-		cout << " success" << endl;
+		LOG(DEBUG) << " success" ;
 		return ReturnCode::SUCCESS;	
 	}
 	else 
 	{
-		cout << " failure" << endl;
+		LOG(DEBUG) << " failure" ;
 		return ReturnCode::FAILURE;	
 	}
 	
@@ -37,19 +39,19 @@ ReturnCode predOnComingCar()
 
 ReturnCode predCarInFront()
 {
-   	cout << "predCarInFront -> " ;
+   	LOG(DEBUG) << "predCarInFront -> " ;
    	random_device rd;  //Will be used to obtain a seed for the random number engine
     mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
     uniform_int_distribution<> dis(0,1);
 	int true_false = dis(gen);
 	if (true_false==1)
 	{
-		cout << " success" << endl;
+		LOG(DEBUG) << " success" ;
 		return ReturnCode::SUCCESS;	
 	}
 	else 
 	{
-		cout << " failure" << endl;
+		LOG(DEBUG) << " failure" ;
 		return ReturnCode::FAILURE;	
 	}
 	
@@ -58,19 +60,19 @@ ReturnCode predCarInFront()
 
 ReturnCode actionAvoid()
 {
-	cout << "Avoiding car -> ";
+	LOG(DEBUG) << "Avoiding car -> ";
 	random_device rd;  //Will be used to obtain a seed for the random number engine
     mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
     uniform_int_distribution<> dis(0,1);
 	int true_false = dis(gen);
 	if (true_false == 1)
 	{
-		cout << " success" << endl;
+		LOG(DEBUG) << " success" ;
 		return ReturnCode::SUCCESS;
 	}
 	else
 	{
-		cout << " running" << endl;
+		LOG(DEBUG) << " running" ;
 		return ReturnCode::RUNNING;
 	}
 }
@@ -83,57 +85,57 @@ ReturnCode actionAvoid()
 
 ReturnCode actionTurnOut()
 {
-	cout << "Turning out -> ";
+	LOG(DEBUG) << "Turning out -> ";
 	random_device rd;  //Will be used to obtain a seed for the random number engine
     mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
     uniform_int_distribution<> dis(0,1);
 	int true_false = dis(gen);
 	if (true_false == 1)
 	{
-		cout << " success" << endl;
+		LOG(DEBUG) << " success" ;
 		return ReturnCode::SUCCESS;
 	}
 	else
 	{
-		cout << " running" << endl;
+		LOG(DEBUG) << " running" ;
 		return ReturnCode::RUNNING;
 	}
 }
 
 ReturnCode actionPassCar()
 {
-	cout << "Passing car -> ";
+	LOG(DEBUG) << "Passing car -> ";
 	random_device rd;  //Will be used to obtain a seed for the random number engine
     mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
     uniform_int_distribution<> dis(0,1);
 	int true_false = dis(gen);
 	if (true_false == 1)
 	{
-		cout << " success" << endl;
+		LOG(DEBUG) << " success" ;
 		return ReturnCode::SUCCESS;
 	}
 	else
 	{
-		cout << " running" << endl;
+		LOG(DEBUG) << " running" ;
 		return ReturnCode::RUNNING;
 	}
 }
 
 ReturnCode actionTurnIn()
 {
-	cout << "Turning in -> ";
+	LOG(DEBUG) << "Turning in -> ";
 	random_device rd;  //Will be used to obtain a seed for the random number engine
     mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
     uniform_int_distribution<> dis(0,1);
 	int true_false = dis(gen);
 	if (true_false == 1)
 	{
-		cout << " success" << endl;
+		LOG(DEBUG) << " success" ;
 		return ReturnCode::SUCCESS;
 	}
 	else
 	{
-		cout << " running" << endl;
+		LOG(DEBUG) << " running" ;
 		return ReturnCode::RUNNING;
 	}
 }
@@ -147,12 +149,12 @@ ReturnCode actionCruise()
 	int true_false = dis(gen);
 	if (true_false == 1)
 	{
-		cout << " success" << endl;
+		LOG(DEBUG) << " success" ;
 		return ReturnCode::SUCCESS;
 	}
 	else
 	{
-		cout << " running" << endl;
+		LOG(DEBUG) << " running" ;
 		return ReturnCode::RUNNING;
 	}
 }
@@ -160,6 +162,12 @@ ReturnCode actionCruise()
 
 int main(int argc, char const *argv[])
 {
+
+	LOGCFG.headers = false; 
+    LOGCFG.level = DEBUG;
+
+	LOG(INFO) << "Main executed with " << (argc - 1) << " arguments";
+
 	BehaviorTree bt;
 	//Node nd;
 
@@ -201,6 +209,7 @@ int main(int argc, char const *argv[])
 	result = sel->tick();
 	while (result != ReturnCode::SUCCESS)
 	{
+		LOG(INFO) << "---------- new iteration ---------";
 		result = sel->tick();
 	}
 
@@ -208,6 +217,6 @@ int main(int argc, char const *argv[])
 	// cout << (cond.tick() == ReturnCode::SUCCESS) << endl;
 
 
-	cout << "code working so far" << endl;
+	LOG(INFO) << "code working so far" ;
 	return 0;
 }
