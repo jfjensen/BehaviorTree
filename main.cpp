@@ -15,148 +15,90 @@ using namespace std;
 
 structlog LOGCFG = {};
 
-ReturnCode predOnComingCar()
+
+ReturnCode succ_fail()
 {
-	
-	LOG(DEBUG) << "predOnComingCar -> ";
-   	random_device rd;  //Will be used to obtain a seed for the random number engine
+	random_device rd;  //Will be used to obtain a seed for the random number engine
     mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
     uniform_int_distribution<> dis(0,1);
 	int true_false = dis(gen);
 	if (true_false==1)
 	{
-		LOG(DEBUG) << " success" ;
+		LOG(DEBUG) << "---> success" ;
 		return ReturnCode::SUCCESS;	
 	}
 	else 
 	{
-		LOG(DEBUG) << " failure" ;
+		LOG(DEBUG) << "---> failure" ;
 		return ReturnCode::FAILURE;	
 	}
+}
+
+ReturnCode succ_runn()
+{
+	random_device rd;  //Will be used to obtain a seed for the random number engine
+    mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    uniform_int_distribution<> dis(0,1);
+	int true_false = dis(gen);
+	if (true_false == 1)
+	{
+		LOG(DEBUG) << "---> success" ;
+		return ReturnCode::SUCCESS;
+	}
+	else
+	{
+		LOG(DEBUG) << "---> running" ;
+		return ReturnCode::RUNNING;
+	}
+}
+
+
+ReturnCode predOnComingCar()
+{
 	
+	LOG(DEBUG) << "predOnComingCar:";
+   	
+	return succ_fail();
 	
 }
 
 ReturnCode predCarInFront()
 {
-   	LOG(DEBUG) << "predCarInFront -> " ;
-   	random_device rd;  //Will be used to obtain a seed for the random number engine
-    mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-    uniform_int_distribution<> dis(0,1);
-	int true_false = dis(gen);
-	if (true_false==1)
-	{
-		LOG(DEBUG) << " success" ;
-		return ReturnCode::SUCCESS;	
-	}
-	else 
-	{
-		LOG(DEBUG) << " failure" ;
-		return ReturnCode::FAILURE;	
-	}
+   	LOG(DEBUG) << "predCarInFront:" ;
+   	return succ_fail();
 	
 }
 
 
 ReturnCode actionAvoid()
 {
-	LOG(DEBUG) << "Avoiding car -> ";
-	random_device rd;  //Will be used to obtain a seed for the random number engine
-    mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-    uniform_int_distribution<> dis(0,1);
-	int true_false = dis(gen);
-	if (true_false == 1)
-	{
-		LOG(DEBUG) << " success" ;
-		return ReturnCode::SUCCESS;
-	}
-	else
-	{
-		LOG(DEBUG) << " running" ;
-		return ReturnCode::RUNNING;
-	}
+	LOG(DEBUG) << "Avoiding car:";
+	return succ_runn();
 }
 
-// ReturnCode actionOvertake()
-// {
-// 	cout << "Overtaking car" << endl;
-// 	return ReturnCode::SUCCESS;
-// }
 
 ReturnCode actionTurnOut()
 {
-	LOG(DEBUG) << "Turning out -> ";
-	random_device rd;  //Will be used to obtain a seed for the random number engine
-    mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-    uniform_int_distribution<> dis(0,1);
-	int true_false = dis(gen);
-	if (true_false == 1)
-	{
-		LOG(DEBUG) << " success" ;
-		return ReturnCode::SUCCESS;
-	}
-	else
-	{
-		LOG(DEBUG) << " running" ;
-		return ReturnCode::RUNNING;
-	}
+	LOG(DEBUG) << "Turning out:";
+	return succ_runn();
 }
 
 ReturnCode actionPassCar()
 {
-	LOG(DEBUG) << "Passing car -> ";
-	random_device rd;  //Will be used to obtain a seed for the random number engine
-    mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-    uniform_int_distribution<> dis(0,1);
-	int true_false = dis(gen);
-	if (true_false == 1)
-	{
-		LOG(DEBUG) << " success" ;
-		return ReturnCode::SUCCESS;
-	}
-	else
-	{
-		LOG(DEBUG) << " running" ;
-		return ReturnCode::RUNNING;
-	}
+	LOG(DEBUG) << "Passing car:";
+	return succ_runn();
 }
 
 ReturnCode actionTurnIn()
 {
-	LOG(DEBUG) << "Turning in -> ";
-	random_device rd;  //Will be used to obtain a seed for the random number engine
-    mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-    uniform_int_distribution<> dis(0,1);
-	int true_false = dis(gen);
-	if (true_false == 1)
-	{
-		LOG(DEBUG) << " success" ;
-		return ReturnCode::SUCCESS;
-	}
-	else
-	{
-		LOG(DEBUG) << " running" ;
-		return ReturnCode::RUNNING;
-	}
+	LOG(DEBUG) << "Turning in:";
+	return succ_runn();
 }
 
 ReturnCode actionCruise()
 {
-	cout << "Cruising -> ";
-	random_device rd;  //Will be used to obtain a seed for the random number engine
-    mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-    uniform_int_distribution<> dis(0,1);
-	int true_false = dis(gen);
-	if (true_false == 1)
-	{
-		LOG(DEBUG) << " success" ;
-		return ReturnCode::SUCCESS;
-	}
-	else
-	{
-		LOG(DEBUG) << " running" ;
-		return ReturnCode::RUNNING;
-	}
+	LOG(DEBUG) << "Cruising:";
+	return succ_runn();
 }
 
 

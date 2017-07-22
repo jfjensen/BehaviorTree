@@ -14,7 +14,7 @@ ReturnCode Action::tick()
 ReturnCode Sequence::tick()
 {
 	
-	cout << "Sequence Tick - " << children.size() << " children" << endl;
+	// cout << "Sequence Tick - " << children.size() << " children" << endl;
 
 	for (int i = currentChild; i < children.size(); ++i)
 	{
@@ -41,7 +41,7 @@ ReturnCode Sequence::tick()
 ReturnCode Selector::tick()
 {
 	
-	cout << "Selector Tick - " << children.size() << " children" << endl;
+	// cout << "Selector Tick - " << children.size() << " children" << endl;
 
 	for (int i = currentChild; i < children.size(); ++i)
 	{
@@ -52,19 +52,19 @@ ReturnCode Selector::tick()
 
 		if (childstatus == ReturnCode::RUNNING)
 		{
-			cout << "running" << endl;
+			// cout << "running" << endl;
 			return ReturnCode::RUNNING;
 		}
 		else if (childstatus == ReturnCode::SUCCESS)
 		{
 			currentChild = 0;
-			cout << "success" << endl;
+			// cout << "success" << endl;
 			return ReturnCode::SUCCESS;
 		}
 		
 	}
 	currentChild = 0;
-	cout << "failure" << endl;
+	// cout << "failure" << endl;
 	return ReturnCode::FAILURE;
 
 };
