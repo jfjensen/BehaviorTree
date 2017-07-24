@@ -7,6 +7,8 @@
 #include "node.h"
 #include "returncode.h"
 
+#include "actionexec.h"
+
 #include "log.h"
 // https://stackoverflow.com/questions/5028302/small-logger-class
 
@@ -14,6 +16,8 @@
 using namespace std;
 
 structlog LOGCFG = {};
+
+ActionExec exec;
 
 
 ReturnCode succ_fail()
@@ -73,32 +77,37 @@ ReturnCode predCarInFront()
 ReturnCode actionAvoid()
 {
 	LOG(DEBUG) << "Avoiding car:";
-	return succ_runn();
+	return exec.run();
+	// return succ_runn();
 }
 
 
 ReturnCode actionTurnOut()
 {
 	LOG(DEBUG) << "Turning out:";
-	return succ_runn();
+	return exec.run();
+	// return succ_runn();
 }
 
 ReturnCode actionPassCar()
 {
 	LOG(DEBUG) << "Passing car:";
-	return succ_runn();
+	return exec.run();
+	// return succ_runn();
 }
 
 ReturnCode actionTurnIn()
 {
 	LOG(DEBUG) << "Turning in:";
-	return succ_runn();
+	return exec.run();
+	// return succ_runn();
 }
 
 ReturnCode actionCruise()
 {
 	LOG(DEBUG) << "Cruising:";
-	return succ_runn();
+	return exec.run();
+	// return succ_runn();
 }
 
 
@@ -149,8 +158,10 @@ int main(int argc, char const *argv[])
 	
 	ReturnCode result;
 	result = sel->tick();
-	while (result != ReturnCode::SUCCESS)
+	// while (result != ReturnCode::SUCCESS)
+	for (int i = 0; i < 15; ++i)
 	{
+		LOG(DEBUG) << "count: " << exec.getCounter();
 		LOG(INFO) << "---------- new iteration ---------";
 		result = sel->tick();
 	}
