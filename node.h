@@ -9,20 +9,17 @@
 
 using namespace std;
 
-class BehaviorTree; // at this point we have an incomplete def. of 'BehaviorTree'
+//class BehaviorTree; // at this point we have an incomplete def. of 'BehaviorTree'
 // https://stackoverflow.com/questions/2133250/does-not-name-a-type-error
 
 class Node
 {
 
-protected:
-	BehaviorTree *bt;
 
 public:
 	Node(){};
 	~Node(){};
 
-	void notify(Node){};
 	virtual ReturnCode tick(){ //cout << "node" << endl; 
 		};
 	
@@ -43,7 +40,7 @@ private:
 public:
 	Action(function<ReturnCode()> act){ action = act; };
 	~Action(){};
-	void notify(Node){};
+	
 	ReturnCode tick();
 
 };
@@ -68,14 +65,14 @@ public:
 class Composite : public Node
 {
 protected:
-	bool resumable;
+	//bool resumable;
 	int currentChild;
 	vector<Node*> children;
 
 public:
 	Composite(){ currentChild = 0; };
 	~Composite(){};
-	void notify(Node){};
+	
 	void addChild(Node *n) { children.push_back(n); }
 	virtual ReturnCode tick() {};
 };

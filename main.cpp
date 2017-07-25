@@ -3,7 +3,7 @@
 #include <string>
 #include <random>
 
-#include "behaviortree.h"
+
 #include "node.h"
 #include "returncode.h"
 
@@ -119,10 +119,7 @@ int main(int argc, char const *argv[])
 
 	LOG(INFO) << "Main executed with " << (argc - 1) << " arguments";
 
-	BehaviorTree bt;
-	//Node nd;
-
-
+	
 	Selector *sel = new Selector();
 
 		Sequence *seq_oncoming_car = new Sequence();
